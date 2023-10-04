@@ -5,11 +5,12 @@ import { useEffect, useState } from "react";
 export default function HomePage({ allProducts }) {
   const [products, setProducts] = useState(allProducts);
 
+  //search by name function
   const handleSearch = (e) => {
     e.preventDefault();
     const searchText = e.target.search.value;
     const searchProducts = allProducts.filter((product) =>
-      product.strMeal.toLowerCase().includes(searchText.toLowerCase())
+      product.name.toLowerCase().includes(searchText.toLowerCase())
     );
     setProducts(searchProducts);
   };
@@ -44,8 +45,11 @@ HomePage.getLayout = function getLayout(page) {
   return <RootLayout>{page}</RootLayout>;
 };
 
+//all product data fetching from server
 export const getServerSideProps = async () => {
-  const response = await fetch("http://localhost:5000/products");
+  const response = await fetch(
+    "https://grocery-shop-backend.onrender.com/products"
+  );
   const data = await response.json();
   return {
     props: {

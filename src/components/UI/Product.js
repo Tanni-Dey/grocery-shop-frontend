@@ -6,12 +6,14 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const Product = ({ product }) => {
   const router = useRouter();
+  const [user] = useAuthState(auth);
+
+  //modal state
   const [singleProduct, setSingleProduct] = useState({});
   const [isActiveModal, setActiveModal] = useState(false);
   const [isDeleteModal, setDeleteModal] = useState(false);
 
-  const [user] = useAuthState(auth);
-
+  //data showing modal function
   const handleModal = (clickedProduct) => {
     if (!user) {
       router.push("/login");
@@ -49,9 +51,12 @@ const Product = ({ product }) => {
 
   //product delete function
   const handleDelete = async (id) => {
-    const response = await fetch(`http://localhost:5000/delete-product/${id}`, {
-      method: "DELETE",
-    });
+    const response = await fetch(
+      `https://grocery-shop-backend.onrender.com/delete-product/${id}`,
+      {
+        method: "DELETE",
+      }
+    );
     const data = response.json();
     if (data) {
       setDeleteModal(true);
@@ -74,6 +79,7 @@ const Product = ({ product }) => {
         </div>
       </button>
 
+      {/* ------------product details modal------- */}
       <dialog open={isActiveModal} className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-lg">{singleProduct.name}</h3>
@@ -108,6 +114,8 @@ const Product = ({ product }) => {
           </div>
         </div>
       </dialog>
+
+      {/* -------------product deleting modal------- */}
       <dialog open={isDeleteModal} className="modal">
         <div className="modal-box">
           <h3 className="font-bold text-2xl text-error text-center mb-5">

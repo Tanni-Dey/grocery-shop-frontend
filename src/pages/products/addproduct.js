@@ -4,6 +4,7 @@ import { useState } from "react";
 const Addproduct = () => {
   const [activeModal, setActiveModal] = useState(false);
 
+  //product adding function
   const handleSubmit = async (event) => {
     event.preventDefault();
     const name = event.target.name.value;
@@ -17,13 +18,16 @@ const Addproduct = () => {
       image: imageLink,
     };
 
-    const response = await fetch("http://localhost:5000/add-product", {
-      method: "POST",
-      body: JSON.stringify(product),
-      headers: {
-        "Content-Type": "application/json",
-      },
-    });
+    const response = await fetch(
+      "https://grocery-shop-backend.onrender.com/add-product",
+      {
+        method: "POST",
+        body: JSON.stringify(product),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
     const data = await response.json();
     if (data.affectedRows === 1) {
       setActiveModal(true);
@@ -73,7 +77,7 @@ const Addproduct = () => {
           />
         </form>
 
-        {/* modal */}
+        {/*---------product adding modal--------- */}
         <dialog open={activeModal} className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-2xl text-success text-center mb-5">

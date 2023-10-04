@@ -5,6 +5,7 @@ import { useAuthState, useSignOut } from "react-firebase-hooks/auth";
 const Navbar = () => {
   const [user] = useAuthState(auth);
   const [signOut] = useSignOut(auth);
+
   return (
     <div className="bg-primary mb-5">
       <div className="container mx-auto">

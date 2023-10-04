@@ -6,6 +6,7 @@ const UpdateProduct = () => {
   const router = useRouter();
   const [activeModal, setActiveModal] = useState(false);
 
+  //product update function
   const handleSubmit = async (event) => {
     event.preventDefault();
     const name = event.target.name.value;
@@ -20,7 +21,7 @@ const UpdateProduct = () => {
     };
 
     const response = await fetch(
-      `http://localhost:5000/update-product/${router.query.productid}`,
+      `https://grocery-shop-backend.onrender.com/update-product/${router.query.productid}`,
       {
         method: "PUT",
         body: JSON.stringify(product),
@@ -38,7 +39,7 @@ const UpdateProduct = () => {
   };
 
   return (
-    <div className="card w-1/3 mx-auto glass shadow-xl">
+    <div className="card w-full md:w-1/3 mx-auto glass shadow-xl">
       <div className="card-body text-center">
         <h2 className="card-title mb-5 justify-center uppercase">
           Update Product
@@ -79,7 +80,7 @@ const UpdateProduct = () => {
           />
         </form>
 
-        {/* modal */}
+        {/*---------- update product modal---------- */}
         <dialog open={activeModal} className="modal">
           <div className="modal-box">
             <h3 className="font-bold text-2xl text-success text-center mb-5">

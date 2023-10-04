@@ -93,7 +93,7 @@ const LoginPage = () => {
         </form>
         <div>
           <p className="mt-3">
-            Don't have any Account ? Please{" "}
+            Dont have any Account ? Please{" "}
             <Link href="/signup" className="text-primary">
               Sign Up
             </Link>{" "}
